@@ -54,3 +54,6 @@ Kotlin.Simon.retrofitandiodispatcher/
 2. Open the project in Android Studio.
 3. Sync the project with Gradle to download all dependencies.
 4. Run the project on an Android emulator or physical device.
+5. App Appearance
+   ![coroutines and Flow](https://github.com/user-attachments/assets/7ca6004f-43f1-4326-b13d-8af89d822c55)
+
