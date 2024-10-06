@@ -139,7 +139,7 @@ fun Product1(product: Product){
         }
         Spacer(modifier = Modifier.height(6.dp))
 
-        Text(text = "${product.title} -- price: ${product.price}", modifier =Modifier.padding(16.dp),
+        Text(text = "${product.title}: \n price: ${product.price}", modifier =Modifier.padding(16.dp),
             fontWeight = FontWeight.SemiBold,
             fontSize = 17.sp)
         Spacer(modifier = Modifier.height(6.dp))
