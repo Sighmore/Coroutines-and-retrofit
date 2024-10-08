@@ -69,8 +69,10 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                     ) {
 
+                    // product list is observed from the ProductViewModel using collectAsState() to monitor changes in real-time
                     val productList = viewModel.products.collectAsState().value
                     val context = LocalContext.current
+                    //launched effect handles errors
                     LaunchedEffect(key1 = viewModel.showErrorToastChannel) {
                         viewModel.showErrorToastChannel.collectLatest { show ->
                             if(show){
@@ -89,7 +91,9 @@ class MainActivity : ComponentActivity() {
                             CircularProgressIndicator()
                         }
                     }else{
-                       LazyColumn(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally,
+                       LazyColumn(modifier = Modifier
+                           .fillMaxSize(),
+                           horizontalAlignment = Alignment.CenterHorizontally,
                            contentPadding = PaddingValues(16.dp)
                        ) {
                            items(productList.size){ index->
@@ -108,6 +112,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Product1(product: Product){
+
+    //image loading using coil
     val imageState = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current).data(product.thumbnail)
             .size(Size.ORIGINAL).build()
@@ -123,8 +129,8 @@ fun Product1(product: Product){
         if(imageState is AsyncImagePainter.State.Error){
             Box(modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
-                , contentAlignment = Alignment.Center){
+                .height(200.dp),
+                 contentAlignment = Alignment.Center){
                 CircularProgressIndicator()
             }
         }
@@ -132,8 +138,8 @@ fun Product1(product: Product){
             Image(modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp),
-                painter = imageState.painter,
-                contentDescription = product.title,
+                painter = imageState.painter,//Shows the image when the image is fetched
+                contentDescription = product.title,//takes the title anad sets as the content description
                 contentScale = ContentScale.Crop
             )
         }
